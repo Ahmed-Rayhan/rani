@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+
+<style>
+            body {
+    background-color: #FFF1F3; /* Soft pastel pink */
+    color: #4A4A4A; /* Soft dark grey for text */
+    font-family: 'Poppins', sans-serif; /* Adding a soft font */
+}
+
+.well {
+    background-color: #FFFFFF; /* White background for the content area */
+    border: 2px solid #FFC0CB; /* Soft pink border */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow */
+    color: #4A4A4A;
+}
+
+h3, label {
+    color: #FF69B4; 
+    font-size: 2em;
+    text-align: center;
+    font-family: 'Pacifico', cursive; 
+}
+
+.form-control {
+    background-color: #FFEBEF; /* Light pastel pink */
+    color: #4A4A4A;
+    border: 2px solid #FF69B4;
+    border-radius: 10px;
+}
+
+.form-control:focus {
+    background-color: #FFB6C1; /* Slightly darker pink when focused */
+    color: #4A4A4A;
+}
+
+#result {
+    background-color: #FFF5F7; /* Soft pink background for the image area */
+    border: 2px solid #FFC0CB;
+    border-radius: 10px;
+}
+.form-control option{
+    text-align: center;
+}
+select.form-control {
+    background-color: #FFEBEF;
+    color: #4A4A4A;
+    border: 2px solid #FF69B4;
+    border-radius: 10px;
+}
+
+select.form-control option {
+    background-color: #FFEBEF;
+    color: #4A4A4A;
+}
+
+@media only screen and (max-width: 430px) {
+    .well {
+        padding: 20px;
+    }
+    #result {
+        width: 100%;
+    }
+    #result img {
+        width: 100% !important;
+    }
+    .form-inline {
+        display: block;
+        text-align: left;
+    }
+    select.form-control {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+
+
+}
+
+</style>
+
+
+
+
+    </head>
+<body>
+    <div class="col-md-3"></div>
+    <div class="col-md-6 well">
+        <h3 class="text-primary">Hello Stranger</h3>
+        <hr style="border-top:1px dotted #6EACDA;">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="form-inline" style="text-align:center;">
+                <!-- S -->
+                <select id="choice" class="form-control" onchange="changeImage()">
+                    <option value="">CHOOSE QUALITY</option>
+                    <option value="anime">240p</option>
+                    <option value="people">720p</option>
+                    <option value="food">1080p</option>
+                    <option value="smita">4K</option>
+                </select>
+            </div>
+            <br />
+            <div id="result" style="height: auto; border:0.5px solid #021526; display: flex; justify-content: center; align-items: center; margin: auto; display:none;"></div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+<script>
+    function changeImage() {
+    var choice = document.getElementById('choice').value;
+    if (choice === "") {
+        alert("No Image Selected!");
+        return;
+    }
+
+    var result = document.getElementById('result');
+    result.removeAttribute('style');
+    result.setAttribute('style', 'display: flex; justify-content: center; align-items: center; height:50%; width: 100%; border:0.5px solid #021526; margin: auto; background-color: #e9f6ff;');
+
+    var img = document.createElement("img");
+    img.src = 'images/' + choice + '.jpg';
+    img.style.height = "auto";
+    img.style.width = "35%";
+    if (window.matchMedia("(max-width: 430px)").matches) {
+        img.style.width = "100%";
+    }
+
+    img.onload = function () {
+        if (choice === "smita") {
+            confetti({
+                particleCount: 1500,
+                spread: 500,
+                origin: { y: 0.4 }
+            });
+        }
+    };
+
+    result.innerHTML = ""; 
+    result.appendChild(img);
+}
+
+</script>
+
+
+</body>
+</html>
